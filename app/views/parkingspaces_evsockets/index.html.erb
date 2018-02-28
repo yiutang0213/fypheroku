@@ -1,0 +1,46 @@
+<% content_for :header do %>
+<%= @venue.name %> EV socket 
+<% end %>
+<% content_for :main do %>
+<table>	
+	<tr>
+		<td>Code</td>
+		<td>Type</td>
+		<td>Status</td>
+	</tr>
+	<% @evsockets.each do |evsocket| %>
+	<tr>
+		<td><%= evsocket.evsocket_code %></td>
+		<td><% if evsocket.evsocket_type==0 %>
+			BS1363
+			<% elsif  evsocket.evsocket_type==1%>
+			IEC 62196
+			<% elsif  evsocket.evsocket_type==2%>
+			SAE J1772
+			<% elsif evsocket.evsocket_type==3%>
+			CHAdeMO
+			<% elsif evsocket.evsocket_type==4%>
+			GB 20234.2
+			<% elsif evsocket.evsocket_type==5%>
+			CCS DC Combo
+			<% elsif evsocket.evsocket_type==6%>
+			Tesla Wall Connector
+			<% elsif evsocket.evsocket_type==7%>
+			Tesla Supercharger
+			<% end %>
+		</td>
+		<td><% if evsocket.evsocket_status %>
+			Available
+			<% else %>
+			Occupied
+			<% end %>
+		</td>
+		<td><%= link_to 'edit', edit_venue_parkingspace_evsocket_path(@venue, @parkingspace,evsocket) %></td>
+		<td><%= link_to 'destroy', venue_parkingspace_evsocket_path(@venue,@parkingspace,evsocket), :method => :delete ,:data => { :confirm => "Are you sure?" }%></td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'New EV socket', new_venue_parkingspace_evsocket_path(@venue,@parkingspace) , :id=>params[:venue_id] %></br>
+
+<%= link_to 'Back to parking space', venue_parkingspaces_path %>
+<% end %>

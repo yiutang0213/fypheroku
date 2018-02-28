@@ -1,0 +1,27 @@
+<% content_for :header do %>
+<%= @venue.name %> Parking space
+<% end %>
+<% content_for :main do %>
+<table>
+	<tr>
+		<td>Number</td>
+		<td>Status</td>
+	</tr>
+	<% @parkingspaces.each do |parkingspace| %>
+	<tr>
+		<td><%= parkingspace.parkingspace_no %></td>
+		<td><% if parkingspace.parkingspace_status %>
+			Available
+			<% else %>
+			Occupied
+			<% end %>
+		</td>
+		<td><%= link_to 'edit', edit_venue_parkingspace_path(@venue, parkingspace) %></td>
+		<td><%= link_to 'destroy', venue_parkingspace_path(@venue, parkingspace), :method => :delete ,:data => { :confirm => "Are you sure?" }%></td>
+		<td><%= link_to 'linked EV socket', venue_parkingspace_evsockets_path(@venue,parkingspace) %></td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'New Parking Space', new_venue_parkingspace_path(@venue) , :id=>params[:venue_id] %></br>
+<%= link_to 'Back to venue', venues_path %>
+<% end %>

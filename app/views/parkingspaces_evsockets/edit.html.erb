@@ -1,0 +1,22 @@
+<% content_for :header do %>
+edit  EV socket 
+<% end %>
+<% content_for :main do %>
+<%= form_for @evsocket, :url => venue_parkingspace_evsocket_path(@venue,@parkingspace,@evsocket), :html => { :method => :patch } do |f| %>
+<table>
+	<tr>
+		<td><%= f.label :evsocket_code, "ev socket code" %></td>
+		<td><%= f.text_field :evsocket_code %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :evsocket_type, "ev socket type" %></td>
+		<td><%= f.select :evsocket_type, [["BS1363",0],["IEC 62196",1],["SAE J1772",2],["CHAdeMO",3],["GB 20234.2",4],["CCS DC Combo",5],["Tesla Wall Connector",6],["Tesla Supercharger",7]] %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :evsocket_status, "ev socket status" %></td>
+		<td><%= f.select :evsocket_status, [["Available",1],["Occupied",0]] %></td>
+	</tr>
+</table>
+<%= f.submit "Update" %>
+<% end %>
+<% end %>

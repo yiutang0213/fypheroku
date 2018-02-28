@@ -1,0 +1,87 @@
+<script>
+	function geoFindMe(type) {
+		var output = document.getElementById("out");
+
+		if (!navigator.geolocation){
+			output.innerHTML = "<p><font size=30pt>Geolocation is not supported by your browser<font></p>";
+			return;
+		}
+
+		function success(position) {
+			var latitude  = position.coords.latitude;
+			var longitude = position.coords.longitude;
+			output.innerHTML = '<p><font size=30pt>Location Found.Redirecting.<font></p>';
+			theUrl = "charger?type=" + type + "&lat=" + latitude + "&lon=" + longitude;
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function() { 
+				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+					arraytohtmltable(xmlHttp.responseText)
+			}
+			xmlHttp.open("GET", theUrl, true); 
+			xmlHttp.send(null);	
+			output.innerHTML = '<p><font size=30pt><font></p>';
+		};
+
+		function error() {
+			output.innerHTML = "<p><font size=30pt>Unable to retrieve your location<font></p>";
+		};
+
+		output.innerHTML = "<p><font size=30pt>Locating…<font></p>";
+
+		navigator.geolocation.getCurrentPosition(success, error);
+	}
+
+	function arraytohtmltable(data) {
+		var rows = JSON.parse(data);
+		var html = '</br>';
+		html += '<div class="container-fluid layer"> ';
+		html += '<div class="row row-striped"><p class="carparkdata"><u><b>Carpark List</b></u></p></div>';
+		html += '<div class="row row-striped">';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Name</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Address</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Charger fee</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Parking fee</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Availability</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">Estimated time of arrival</p></div>';
+		html += "</div>"
+		for( var i = 0; i < rows.length; i++) {
+			html += '<div class="row row-striped" >'
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].name+'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].address+'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].charger_fee+'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].availability+'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-6"><p class="carparkdata">'+rows[i].est+'</p></div>';
+			html += '</div>';
+		}
+		html += '</div>';
+
+		document.getElementById('htmltablefromarray').innerHTML = html;
+	}
+</script>
+
+	<div class="bg">
+		<center><br>
+			<p><font color="#404040" size="7">Web-Portal for Electric Vehicle Charging Stations</font></p>
+
+			<p><font color="#404040" size="5">Please select suitable socket type</font></p>
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('bs1363')" ;return false;">BS1363</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('iec62196')" ;return false;>IEC 62196</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('saej1772')" ;return false;>SAE J1772</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('chademo')" ;return false;>CHAdeMO</a></div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('gb20234')";return false;>GB 20234.2</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('ccsdccombo')";return false;>CCS DC Combo</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslawallconnector')";return false;>Tesla Wall Connector</a></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslasupercharger')";return false;>Tesla Supercharger</a></div>
+				</div>
+			</div>
+			<div id="out"></div>
+			<div id="htmltablefromarray"></div>
+			<%= render "common/footer" %>
+		</center>
+	</div>
+

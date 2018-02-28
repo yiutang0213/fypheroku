@@ -1,0 +1,39 @@
+<% content_for :header do %>
+Car park Index
+<% end %>
+
+<% content_for :main do %>
+<table>
+	<tr>
+		<td>Name</td>
+		<td>Address</td>
+		<td>Charging fee</td>
+		<td>Parking fee</td>
+		<td>Latitude</td>
+		<td>Longitude</td>
+	</tr>
+	<% @venues.each do |venue| %>
+	<tr>
+		<td><%= link_to venue.name, venue_parkingspaces_path(venue) %></td>
+		<td><%= venue.address %></td>
+		<td><%= venue.charger_fee %></td>
+		<td><%= venue.parking_fee %></td>
+		<td><%= venue.latitude %></td>
+		<td><%= venue.longitude %></td>
+		<td><%= link_to 'Edit', edit_venue_path(venue) %></td>
+		<td><%= link_to 'Delete', venue_path(venue), :method => :delete, :data => { :confirm => "Are you sure?" } %>  </td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'New Venue', new_venue_path  %>
+<% end %>
+
+<% content_for :sidebar do %>
+<table>
+	<% @venues.each do |venue| %>
+	<tr>
+		<td><%= link_to venue.name, venue_parkingspaces_path(venue) %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>

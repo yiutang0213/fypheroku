@@ -1,0 +1,24 @@
+<% content_for :header do %>
+Edit parking space
+<% end %>
+<% content_for :main do %>
+<%= form_for @parkingspace, :url => venue_parkingspace_path(@venue,@parkingspace), :html => { :method => :patch } do |f| %>
+<table>
+	<tr>
+		<td><%= f.label :parkingspace_no, "Parking space number" %></td>
+		<td><%= f.text_field :parkingspace_no %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :parkingspace_status, "Parking space status" %></td>
+		<td><%= f.select :parkingspace_status, [["Available",1],["Occupied",0]] %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :evsocket_id, "Connectable EVsocket" %></td>
+		<td>
+			<%= f.collection_check_boxes(:evsocket_ids, Evsocket.where( :venue_id => @parkingspace.venue_id ).all, :id, :evsocket_code) %>
+		</td>
+	</tr>
+</table>
+<%= f.submit "Update" %>
+<% end %>
+<% end %>

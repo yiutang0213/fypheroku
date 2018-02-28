@@ -1,0 +1,33 @@
+<% content_for :header do %>
+Edit car park information
+<% end %>
+<% content_for :main do %>
+<%= form_for @venue, :url => venue_path(@venue), :method => :patch do |f| %>
+<table>
+	<tr>
+		 <td><%= f.label :name, "Name" %></td>
+		 <td><%= f.text_field :name %></td>
+	</tr>
+	<tr>
+		 <td><%= f.label :address, "Address" %></td>
+		 <td><%= f.text_field :address %></td>
+	</tr>
+	<tr>
+		 <td><%= f.label :charger_fee, "Charger fee" %></td>
+		 <td><%= f.text_field :charger_fee %></td>
+	</tr>
+	<tr>
+		 <td><%= f.label :parking_fee, "Parking fee" %></td>
+		 <td><%= f.text_field :parking_fee %></td>
+	</tr>
+	<tr>
+		 <td><%= f.label :latitude, "Latitude" %></td>
+		 <td><%= f.text_field :latitude %></td>
+	</tr>
+	<tr>
+		 <td><%= f.label :longitude, "Longitude" %></td>
+		 <td><%= f.text_field :longitude %></td>
+	</table>
+	<%= f.submit "Update" %>
+	<% end %>
+<% end %>

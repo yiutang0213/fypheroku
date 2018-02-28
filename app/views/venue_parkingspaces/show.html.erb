@@ -1,0 +1,19 @@
+<% content_for :main do %>
+<table>
+	<tr>
+		<td>Parking space number:</td>
+		<td><%= @parkingspace.parkingspace_no %></td>
+	</tr>
+	<tr>
+		<td>Parking space status:</td>
+		<td id="Pstatus">
+	</tr>
+</table>
+
+<p><%= link_to 'Back to Parking Space index', venue_parkingspaces_path %></p>
+<% end %>
+<script>
+	if (<%= @parkingspace.parkingspace_status %>)
+		{document.getElementById("Pstatus").innerHTML = "Available";}
+	else {document.getElementById("Pstatus").innerHTML = "Occpied";}
+</script>

@@ -1,0 +1,32 @@
+
+<% content_for :header do %>
+Car park detail
+<% end %>
+<% content_for :main do %>
+<table>
+	<tr>
+		<td>Name</td>
+		<td><%= @venue.name %></td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td><%= (@venue.address) %></td>
+	</tr>
+	<tr>
+		<td>Charger_fee</td>
+		<td><%= (@venue.charger_fee) %></td>
+	</tr>
+	<tr>
+		<td>Parking_fee</td>
+		<td><%= (@venue.parking_fee) %></td>
+	</tr>
+	<tr>
+		<td>Latitude</td>
+		<td><%= (@venue.latitude) %></td>
+	</tr>
+	<tr>
+		<td>Longitude</td>
+		<td><%= (@venue.longitude) %></td>
+	</table>
+	<p><%= link_to 'Back to index', venues_path %></p>
+<% end %>

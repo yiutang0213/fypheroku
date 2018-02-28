@@ -1,0 +1,44 @@
+<% content_for :main do %>
+<table>
+	<tr>
+		<td>EV socket code</td>
+		<td><%= @evsocket.evsocket_code %></td>
+	</tr>
+	<tr>
+		<td>EV socket type</td>
+		<td id="Etype"></td>
+	</tr>
+	<tr>
+		<td>EV socket status</td>
+		<td id="Estatus">
+		</td>
+	</tr>
+</table>
+
+<p><%= link_to 'Back to EV index', venue_parkingspace_evsockets_path(@venue,@parkingspace) %></p>
+
+<script>
+	if (<%= @evsocket.evsocket_status %>)
+		{document.getElementById("Estatus").innerHTML = "Available";}
+	else {document.getElementById("Estatus").innerHTML = "Occpied";}
+</script>
+
+<script>
+	if (<%= @evsocket.evsocket_type %>==0)
+		{document.getElementById("Etype").innerHTML = "BS1363";}
+	else if (<%= @evsocket.evsocket_type %>==1)
+		{document.getElementById("Etype").innerHTML = "IEC 62196";}
+	else if (<%= @evsocket.evsocket_type %>==2)
+		{document.getElementById("Etype").innerHTML = "SAE J1772";}
+	else if (<%= @evsocket.evsocket_type %>==3)
+		{document.getElementById("Etype").innerHTML = "CHAdeMO";}
+	else if (<%= @evsocket.evsocket_type %>==4)
+		{document.getElementById("Etype").innerHTML = "GB 20234.2";}
+	else if (<%= @evsocket.evsocket_type %>==5)
+		{document.getElementById("Etype").innerHTML = "CCS DC Combo";}
+	else if (<%= @evsocket.evsocket_type %>==6)
+		{document.getElementById("Etype").innerHTML = "Tesla Wall Connector";}
+	else if (<%= @evsocket.evsocket_type %>==7)
+		{document.getElementById("Etype").innerHTML = "Tesla Supercharger";}
+</script>
+<% end %>
