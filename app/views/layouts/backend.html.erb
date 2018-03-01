@@ -8,6 +8,11 @@
   	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   	<title>Fixed Width 1 Green</title>
   	<style type="text/css">
   	html, #page { padding:0; margin:0;}
@@ -56,9 +61,14 @@
   	#footerblurb .column { margin:0; text-align:justify; float:left;width:250px;padding:0 24px;}
 
   	/* Footer */
-  	#footer { background:#fff;}
-  	#footer-inner { margin:auto; text-align:center; padding:12px; width:922px;}
-  	#footer a {color:green;text-decoration:none;}
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+  }
 
   	/* Clear both sides to assist with div alignment  */
   	.clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
@@ -71,15 +81,7 @@
 		<header id="header">
 			<div id="header-inner"> 
 				<div id="logo">
-					<h1>Web-Portal for Electric Vehicle Charging Stations</h1>
-				</div>
-				<div id="top-nav">
-					<ul>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Help</a></li>
-					</ul>
+					<h1><a href="/">Web-Portal for Electric Vehicle Charging Stations</a></h1>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -102,7 +104,7 @@
 
 				<nav id="sidebar">
 					<div class="widget">
-						<h3><a href="/venues">Carpark</a></h3>
+						<h3><a href="/venues">Carpark index</a></h3>
 						<p>
 							
 					</p>
@@ -114,9 +116,8 @@
 		</div>
 
 
-			<div id="footer-inner">
-				<p>&copy; polyu student 14074565d fyp </p>
-				<div class="clr"></div>
+      <%= render "common/footer" %>
+
 			</div>
 		</footer>
 	</div>

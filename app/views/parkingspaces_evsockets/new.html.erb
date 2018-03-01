@@ -5,7 +5,7 @@ Create new EV socket
 
 <% content_for :main do %>
 <%= form_for @evsocket, :url => venue_parkingspace_evsockets_path do |f| %>
-<table>
+<table class="table">
 	<tr>
 		<td><%= f.label :evsocket_code, "ev socket code" %></td>
 		<td><%= f.text_field :evsocket_code %></td>

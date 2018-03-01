@@ -6,7 +6,7 @@ Create new parking space
 <% content_for :main do %>
 <%= form_for @parkingspace, :url => venue_parkingspaces_path do |f| %>
 
-<table>
+<table class="table">
 	<tr>
 		<td><%= f.label :parkingspace_no, "Parking space number" %></td>
 		<td><%= f.text_field :parkingspace_no %></td>

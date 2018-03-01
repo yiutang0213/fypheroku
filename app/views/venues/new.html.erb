@@ -4,7 +4,7 @@ Create a new car park
 
 <% content_for :main do %>
 <%= form_for @venue, :url => venues_path do |f| %>
-<table>
+<table class="table">
 	<tr>
 		 <td><%= f.label :name, "Name" %></td>
 		 <td><%= f.text_field :name %></td>

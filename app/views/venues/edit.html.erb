@@ -3,7 +3,7 @@ Edit car park information
 <% end %>
 <% content_for :main do %>
 <%= form_for @venue, :url => venue_path(@venue), :method => :patch do |f| %>
-<table>
+<table class="table">
 	<tr>
 		 <td><%= f.label :name, "Name" %></td>
 		 <td><%= f.text_field :name %></td>

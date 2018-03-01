@@ -3,7 +3,7 @@ Edit parking space
 <% end %>
 <% content_for :main do %>
 <%= form_for @parkingspace, :url => venue_parkingspace_path(@venue,@parkingspace), :html => { :method => :patch } do |f| %>
-<table>
+<table class="table">
 	<tr>
 		<td><%= f.label :parkingspace_no, "Parking space number" %></td>
 		<td><%= f.text_field :parkingspace_no %></td>
