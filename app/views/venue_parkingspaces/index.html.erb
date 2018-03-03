@@ -4,11 +4,13 @@
 <% content_for :main do %>
 <table class="table">
 	<tr>
+		<td>parking spaceID</td>>
 		<td>Number</td>
 		<td>Status</td>
 	</tr>
 	<% @parkingspaces.each do |parkingspace| %>
 	<tr>
+		<td><%= parkingspace.id %></td>
 		<td><%= parkingspace.parkingspace_no %></td>
 		<td><% if parkingspace.parkingspace_status %>
 			Available

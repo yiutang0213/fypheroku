@@ -4,12 +4,14 @@
 <% content_for :main do %>
 <table class="table">	
 	<tr>
+		<td>EVsocket id</td>>
 		<td>Code</td>
 		<td>Type</td>
 		<td>Status</td>
 	</tr>
 	<% @evsockets.each do |evsocket| %>
 	<tr>
+		<td><%= evsocket.id %></td>
 		<td><%= evsocket.evsocket_code %></td>
 		<td><% if evsocket.evsocket_type==0 %>
 			BS1363

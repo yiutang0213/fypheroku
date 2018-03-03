@@ -7,28 +7,20 @@ class ChargerController < ApplicationController
 	def index
 		if params[:type] =='bs1363'
 			@evsocket_type = "evsocket_type = 0"
-			@page_title = "BS 1363 "
 		elsif params[:type] == 'iec62196'
 			@evsocket_type = "evsocket_type = 1"
-			@page_title = "IEC 62196"
 		elsif params[:type] == 'saej1772'
 			@evsocket_type = "evsocket_type = 2"			
-			@page_title = "SAE J1772"
 		elsif params[:type] == 'chademo'
 			@evsocket_type = "evsocket_type = 3"			
-			@page_title = "CHAdeMO"
 		elsif params[:type] == 'gb20234'
 			@evsocket_type = "evsocket_type = 4"			
-			@page_title = "GB 20234.2"
 		elsif params[:type] == 'ccsdccombo'
 			@evsocket_type = "evsocket_type = 5"			
-			@page_title = "CCS DC COMBO"
 		elsif params[:type] == 'teslawallconnector'
 			@evsocket_type = "evsocket_type = 6"			
-			@page_title = "Tesla wall connector"
 		elsif params[:type] == 'teslasupercharger'
 			@evsocket_type = "evsocket_type = 7"					
-			@page_title = "Tesla Supercharger"	
 		end
 
 		@carparks = Venue.joins(parkingspaces: :evsockets).where(@evsocket_type).group("venues.id")

@@ -5,6 +5,7 @@ Car park Index
 <% content_for :main do %>
 <table class="table">
 	<tr>
+		<td>Venue ID</td>>
 		<td>Name</td>
 		<td>Address</td>
 		<td>Charging fee</td>
@@ -14,6 +15,7 @@ Car park Index
 	</tr>
 	<% @venues.each do |venue| %>
 	<tr>
+	    <td><%= venue.id %></td>
 		<td><%= link_to venue.name, venue_parkingspaces_path(venue) %></td>
 		<td><%= venue.address %></td>
 		<td><%= venue.charger_fee %></td>
