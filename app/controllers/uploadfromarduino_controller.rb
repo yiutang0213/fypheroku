@@ -7,6 +7,7 @@ class UploadfromarduinoController < ApplicationController
 		if params[:key]="Zhugirf3h4578g3yuisx7g45h"
 			then
 			@parkingspaceid=0
+			@evsocketid=0
 			if params[:parkingspaceid]
 				@parkingspaceid=params[:parkingspaceid]
 				@parkingspacestatus = params[:Pstatus]
@@ -18,6 +19,18 @@ class UploadfromarduinoController < ApplicationController
 				@ret["parkingspace_status"]=@parkingspacestatus
 				@ret["status"]="upload successful"
 			end
+			if params[:evsocketid]
+				@evsocketid=params[:evsocketid]
+				@evsocketstatus = params[:Estatus]
+				editevsocket = Evsocket.where({:id => @evsocketid}).first
+				editevsocket.evsocket_status=params[:Estatus]
+				editevsocket.save
+				@ret ={}
+				@ret["evsocket_id"]=@evsocketid
+				@ret["evsocket_status"]=@evsocketstatus
+				@ret["status"]="upload successful"
+			end
+
 		else
 			@ret["status"]="upload failed."
 		end
