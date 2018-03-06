@@ -1,7 +1,7 @@
 <style type="text/css">
-  html { height: 100% }
-  body { height: 100%; margin: 0; padding: 0 }
-  #map_canvas { height: 100% }
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map_canvas { height: 100% }
 </style>
 <script>
 	function geoFindMe(type) {
@@ -39,100 +39,98 @@
 	function arraytohtmltable(data,type) {
 		var rows = JSON.parse(data);
 		var html = '</br>';
-		html += '<div class="container-fluid layer"> ';
-		html += '<div class="row"><h2 class="section-heading">Carpark List of type '+type+'</h2></div><hr>';
-		html += '<div class="row addline">';
-		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Name</p></div>';
-		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Address</p></div>';
-		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Charger fee</p></div>';
-		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Parking fee</p></div>';
-		html += '<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">Availability</p></div>';
-		html += '<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">Estimated time of arrival</p></div>';
-		html += "</div>"
-		for( var i = 0; i < rows.length; i++) {
-			html += '<div class="row addline">'
-			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].name+'</p></div>';
-			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata"><a href="https://www.google.com/maps/dir/?api=1&destination='+rows[i].address+'" target="_blank";>'+rows[i].address+'</a></p></div>';
-			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].charger_fee+'</p></div>';
-			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
-			html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].availability+'</p></div>';
-			html +='<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">'+rows[i].est+'</p></div>';
+			html += '<div class="container-fluid layer"> ';
+			html += '<div class="row"><h2 class="section-heading">Carpark List of type '+type+'</h2></div><hr>';
+			html += '<div class="row addline">';
+			html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Name</p></div>';
+			html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Address</p></div>';
+			html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Charger fee</p></div>';
+			html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Parking fee</p></div>';
+			html += '<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">Availability</p></div>';
+			html += '<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">Estimated time of arrival</p></div>';
+			html += "</div>"
+			for( var i = 0; i < rows.length; i++) {
+				html += '<div class="row addline">'
+				html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].name+'</p></div>';
+				html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata"><a href="https://www.google.com/maps/dir/?api=1&destination='+rows[i].address+'" target="_blank";>'+rows[i].address+'</a></p></div>';
+				html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].charger_fee+'</p></div>';
+				html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
+				html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].availability+'</p></div>';
+				html +='<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">'+rows[i].est+'</p></div>';
+				html += '</div>';
+			}
 			html += '</div>';
-		}
-		html += '</div>';
 		document.getElementById('htmltablefromarray').innerHTML = html;
 		initialize()
 	}
 </script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+<script src="http://maps.google.com/maps/api/js?sensor=false&language=zh-TW">
 </script>
 
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXyeT9DZpFtxbLAMWqvSVQuPS7gStNNkE&callback=initMap">
-</script>
+
 
 
 <script>
 
-var locations = [
-  ['loan 1', 33.890542, 151.274856, 'address 1'],
-  ['loan 2', 33.923036, 151.259052, 'address 2'],
-  ['loan 3', 34.028249, 151.157507, 'address 3'],
-  ['loan 4', 33.80010128657071, 151.28747820854187, 'address 4'],
-  ['loan 5', 33.950198, 151.259302, 'address 5']
-  ];
+	var locations = [
+	['loan 1', 33.890542, 151.274856, 'address 1'],
+	['loan 2', 33.923036, 151.259052, 'address 2'],
+	['loan 3', 34.028249, 151.157507, 'address 3'],
+	['loan 4', 33.80010128657071, 151.28747820854187, 'address 4'],
+	['loan 5', 33.950198, 151.259302, 'address 5']
+	];
 
-  function initialize() {
+	function initialize() {
 
-    var myOptions = {
-      center: new google.maps.LatLng(33.890542, 151.274856),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+		var myOptions = {
+			center: new google.maps.LatLng(33.890542, 151.274856),
+			zoom: 8,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 
-    };
-    var map = new google.maps.Map(document.getElementById("map"),
-        myOptions);
+		};
+		var map = new google.maps.Map(document.getElementById("map"),
+			myOptions);
 
-    setMarkers(map,locations)
+		setMarkers(map,locations)
 
-  }
-
-
-
-  function setMarkers(map,locations){
-
-      var marker, i
-
-for (i = 0; i < locations.length; i++)
- {  
-
- var loan = locations[i][0]
- var lat = locations[i][1]
- var long = locations[i][2]
- var add =  locations[i][3]
-
- latlngset = new google.maps.LatLng(lat, long);
-
-  var marker = new google.maps.Marker({  
-          map: map, title: loan , position: latlngset  
-        });
-        map.setCenter(marker.getPosition())
+	}
 
 
-        var content = "Loan Number: " + loan +  '</h3>' + "Address: " + add     
 
-  var infowindow = new google.maps.InfoWindow()
+	function setMarkers(map,locations){
 
-google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
-        return function() {
-           infowindow.setContent(content);
-           infowindow.open(map,marker);
-        };
-    })(marker,content,infowindow)); 
+		var marker, i
 
-  }
-  }
-  </script>
+		for (i = 0; i < locations.length; i++)
+		{  
+
+			var loan = locations[i][0]
+			var lat = locations[i][1]
+			var long = locations[i][2]
+			var add =  locations[i][3]
+
+			latlngset = new google.maps.LatLng(lat, long);
+
+			var marker = new google.maps.Marker({  
+				map: map, title: loan , position: latlngset  
+			});
+			map.setCenter(marker.getPosition())
+
+
+			var content = "Loan Number: " + loan +  '</h3>' + "Address: " + add     
+
+			var infowindow = new google.maps.InfoWindow()
+
+			google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+				return function() {
+					infowindow.setContent(content);
+					infowindow.open(map,marker);
+				};
+			})(marker,content,infowindow)); 
+
+		}
+	}
+</script>
 
 <!-- Header -->
 <header class="masthead">
@@ -158,6 +156,7 @@ google.maps.event.addListener(marker,'click', (function(marker,content,infowindo
 <section id="select">
 	<center>                      
 		<h2 class="section-heading ">We've got what you need!</h2><hr>
+		Please select your socket type
 		<div class="container"> 
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('bs1363')" ;return false;">BS1363</a></div>
