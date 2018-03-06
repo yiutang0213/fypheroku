@@ -1,23 +1,229 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title><%= @page_title || "14074565d FYP" %></title>
 
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<style>
 	@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
 	@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+	       #map {
+        height: 400px;
+        width: 100%;
+       }
+
+
+	html {
+		width: 100%;
+		height: 100%;
+	}
+
 
 	body {
-		font-family: 'Lato', sans-serif;
-		background: url('<%= asset_path("section-hero-background.jpg") %>') no-repeat center center fixed; 
+		font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+		background-color: #F2F2F2;
+
+			}
+
+	hr {
+		max-width: 50px;
+		border-width: 3px;
+		border-color: #FE9A2E;
+	}
+
+	hr.light {
+		border-color: #fff;
+	}
+
+	a {
+		color: #FE9A2E;
+		-webkit-transition: all 0.2s;
+		-moz-transition: all 0.2s;
+		transition: all 0.2s;
+	}
+
+	a:hover {
+		color: #FE9A2E;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+	}
+
+	.bg-orange {
+		background-color: #FE9A2E !important;
+	}
+	.bg-white {
+		background-color: #FFFFFF !important;
+	}
+
+	.text-faded {
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	section {
+		padding: 8rem 0;
+	}
+			section.masthead {
+			height: 100vh;
+			min-height: 650px;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+	.section-heading {
+		margin-top: 0;
+	}
+
+	::-moz-selection {
+		color: #fff;
+		background: #212529;
+		text-shadow: none;
+	}
+
+	::selection {
+		color: #fff;
+		background: #212529;
+		text-shadow: none;
+	}
+
+	img::selection {
+		color: #fff;
+		background: transparent;
+	}
+
+	img::-moz-selection {
+		color: #fff;
+		background: transparent;
+	}
+
+
+
+	header.masthead {
+		padding-top: 10rem;
+		padding-bottom: calc(10rem - 56px);
+		background-image:url('<%= asset_path("section-hero-background.jpg") %>');
+		background-position: center center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
 	}
 
+	header.masthead hr {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
 
+	header.masthead h1 {
+		font-size: 2rem;
+	}
+
+	header.masthead p {
+		font-weight: 300;
+	}
+
+	@media (min-width: 768px) {
+		header.masthead p {
+			font-size: 1.15rem;
+		}
+	}
+
+	@media (min-width: 992px) {
+		header.masthead {
+			height: 100vh;
+			min-height: 650px;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		header.masthead h1 {
+			font-size: 3rem;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		header.masthead h1 {
+			font-size: 4rem;
+		}
+	}
+
+	header.masthead .intro-text {
+		padding-top: 150px;
+		padding-bottom: 100px;
+	}
+
+	header.masthead .intro-text .intro-lead-in {
+		font-size: 22px;
+		font-style: italic;
+		line-height: 22px;
+		margin-bottom: 25px;
+		font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+
+	header.masthead .intro-text .intro-heading {
+		font-size: 50px;
+		font-weight: 700;
+		line-height: 50px;
+		margin-bottom: 25px;
+		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+
+	@media (min-width: 768px) {
+		header.masthead .intro-text {
+			padding-top: 40px;
+			padding-bottom: 200px;
+		}
+		header.masthead .intro-text .intro-lead-in {
+			font-size: 40px;
+			font-style: italic;
+			line-height: 40px;
+			margin-bottom: 25px;
+			font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+		header.masthead .intro-text .intro-heading {
+			font-size: 75px;
+			font-weight: 700;
+			line-height: 75px;
+			margin-bottom: 50px;
+			font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+	}
+
+	.btn {
+		font-weight: 700;
+		text-transform: uppercase;
+		border: none;
+		border-radius: 300px;
+		font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+	}
+
+	.btn-xl {
+		padding: 1rem 2rem;
+	}
+
+	.btn-primary {
+		background-color: #FE9A2E;
+		border-color: #FE9A2E;
+	}
+
+	.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+		color: #fff;
+		background-color: #ee4b28 !important;
+	}
+
+	.btn-primary:active, .btn-primary:focus {
+		box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+	}
 
 	a.animated-button:link, a.animated-button:visited {
 		position: relative;
@@ -83,10 +289,10 @@
 
 
 	a.animated-button.victoria-four {
-		border: 2px solid rgba(0,0,0,1);
+		border: 2px solid #FE9A2E;
 	}
 	a.animated-button.victoria-four:after {
-		background: rgba(0,0,0,0.5);
+		background: #FE9A2E;
 		opacity: .5;
 		-moz-transform: translateY(-50%) translateX(-50%) rotate(90deg);
 		-ms-transform: translateY(-50%) translateX(-50%) rotate(90deg);
@@ -97,11 +303,7 @@
 		opacity: 1;
 		height: 600% !important;
 	}
-	p.carparkdata{
-		font-size: 18px;
-		text-align: center;
-		color: rgb(0,0,0,1);	
-	}
+
 	.footer {
 		position: fixed;
 		left: 0;
@@ -111,22 +313,19 @@
 		text-align: center;
 	}
 	.layer {
-		background-color: rgba(255, 255, 255, 0.5);
 		position: relative;
 		top: 50%;
 		left: 0;
 		width: 1200px;
 		height: 100%;
-
-
 	}
 
 
 	div.addline { 
-    border-bottom:1px solid #999;
-    	}
+		border-bottom:1px solid #999;
+	}
 
-	</style>
+</style>
 </head>
 <body>
 	<%=yield%>

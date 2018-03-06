@@ -15,7 +15,7 @@
 			var xmlHttp = new XMLHttpRequest();
 			xmlHttp.onreadystatechange = function() { 
 				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-					arraytohtmltable(xmlHttp.responseText)
+					arraytohtmltable(xmlHttp.responseText,type)
 			}
 			xmlHttp.open("GET", theUrl, true); 
 			xmlHttp.send(null);	
@@ -31,14 +31,14 @@
 		navigator.geolocation.getCurrentPosition(success, error);
 	}
 
-	function arraytohtmltable(data) {
+	function arraytohtmltable(data,type) {
 		var rows = JSON.parse(data);
 		var html = '</br>';
 		html += '<div class="container-fluid layer"> ';
-		html += '<div class="row"><p class="carparkdata"><b>Carpark List</b></p></div>';
+		html += '<div class="row"><h2 class="section-heading">Carpark List of type '+type+'</h2></div><hr>';
 		html += '<div class="row addline">';
 		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Name</p></div>';
-	        html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Address</p></div>';
+		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Address</p></div>';
 		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Charger fee</p></div>';
 		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Parking fee</p></div>';
 		html += '<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">Availability</p></div>';
@@ -47,7 +47,7 @@
 		for( var i = 0; i < rows.length; i++) {
 			html += '<div class="row addline">'
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].name+'</p></div>';
-	                html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata"><a href="https://www.google.com/maps/dir/?api=1&destination='+rows[i].address+'" target="_blank";>'+rows[i].address+'</a></p></div>';
+			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata"><a href="https://www.google.com/maps/dir/?api=1&destination='+rows[i].address+'" target="_blank";>'+rows[i].address+'</a></p></div>';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].charger_fee+'</p></div>';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
 			html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].availability+'</p></div>';
@@ -55,33 +55,122 @@
 			html += '</div>';
 		}
 		html += '</div>';
-
 		document.getElementById('htmltablefromarray').innerHTML = html;
+
+		var uluru = {lat: -25.363, lng: 131.044};
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: uluru
+		});
+
+		var contentString = '<div id="content">'+
+		'<div id="siteNotice">'+
+		'</div>'+
+		'<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+		'<div id="bodyContent">'+
+		'<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+		'sandstone rock formation in the southern part of the '+
+		'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+		'south west of the nearest large town, Alice Springs; 450&#160;km '+
+		'(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+		'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+		'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+		'Aboriginal people of the area. It has many springs, waterholes, '+
+		'rock caves and ancient paintings. Uluru is listed as a World '+
+		'Heritage Site.</p>'+
+		'<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+		'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+		'(last visited June 22, 2009).</p>'+
+		'</div>'+
+		'</div>';
+
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		});
+
+		var marker = new google.maps.Marker({
+			position: uluru,
+			map: map,
+			title: 'Uluru (Ayers Rock)'
+		});
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
 	}
+
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
 
-	<div class="bg">
-		<center><br>
-			<p><font color="#404040" size="7">Web-Portal for Electric Vehicle Charging Stations</font></p>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXyeT9DZpFtxbLAMWqvSVQuPS7gStNNkE&callback=initMap">
+</script>
 
-			<p><font color="#404040" size="5">Please select suitable socket type</font></p>
-			<div class="container"> 
-				<div class="row">
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('bs1363')" ;return false;">BS1363</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('iec62196')" ;return false;>IEC 62196</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('saej1772')" ;return false;>SAE J1772</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('chademo')" ;return false;>CHAdeMO</a></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('gb20234')";return false;>GB 20234.2</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('ccsdccombo')";return false;>CCS DC Combo</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslawallconnector')";return false;>Tesla Wall Connector</a></div>
-					<div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslasupercharger')";return false;>Tesla Supercharger</a></div>
-				</div>
-			</div>
-			<div id="out"></div>
-			<div id="htmltablefromarray"></div>
-			<%= render "common/footer" %>
-		</center>
+
+
+<!-- Header -->
+<header class="masthead">
+	<div class="container">
+		<div class="intro-text">
+			<div class="intro-lead-in"><font color="black">Welcome To Our Web-Protrol!</font></div>
+			<div class="intro-heading text-uppercase"><font color="black">It's Nice To Meet You</font></div>
+			<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">Tell Me More</a>
+		</div>
 	</div>
+</header>
+<section class="bg-white" id="about">
+	<center>  
+		<h2 class="section-heading ">
+			About
+		</h2>
+		<hr>
+		This is a "easy access smart portal” which can report the status of the EV charging stations and the chargers in<br>
+		HK so as to provide an easy way for YOU to access What you have to do is just select YOUR socket type and nothing!
+	</center>
+</section>
 
+<section id="select">
+	<center>                      
+		<h2 class="section-heading ">We've got what you need!</h2><hr>
+		<div class="container"> 
+			<div class="row">
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('bs1363')" ;return false;">BS1363</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('iec62196')" ;return false;>IEC 62196</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('saej1772')" ;return false;>SAE J1772</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('chademo')" ;return false;>CHAdeMO</a></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('gb20234')";return false;>GB 20234.2</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('ccsdccombo')";return false;>CCS DC Combo</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslawallconnector')";return false;>Tesla Wall Connector</a></div>
+				<div class="col-md-3 col-sm-3 col-xs-6"><a href="#result" class="btn btn-sm animated-button victoria-four" onclick="geoFindMe('teslasupercharger')";return false;>Tesla Supercharger</a></div>
+			</div>
+		</div>
+		<br>
+	</center>
+</section>
+
+
+<section class="bg-white masthead" id="result">
+	<center>
+		<div id="out">Carpark data will be shown here when u press the button above</div>
+		<div id="htmltablefromarray"> </div>
+		<div id="map"></div>
+
+	</center>
+</section>
+
+<section>
+	<div class="container"> 
+		<div class="row">
+			<p class="text-center"> <font color="black" >This website is a Final Year Project 
+				<br>@The Hong Kong Polytechnic University 
+				<br>Electrical Engineering
+				<br>Supervised by Prof.WL CHAN
+				<br>Created by student 14074565D
+				<font>
+				</p>			
+			</div>
+		</div>
+	</center>
+</section>
