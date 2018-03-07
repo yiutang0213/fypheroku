@@ -58,7 +58,7 @@ body { height: 100%; margin: 0; padding: 0 }
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
 			html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].availability+'</p></div>';
 			html +='<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">'+rows[i].est+'</p></div>';
-			carparklocaltion =[rows[i].name, rows[i].carpark_latitude, rows[i].carpark_longitude, rows[i].address];
+			carparklocaltion =[rows[i].name, rows[i].carpark_latitude, rows[i].carpark_longitude, rows[i].address, rows[i].availability];
 			locations.push(carparklocaltion)
 			html += '</div>';
 		}
@@ -115,7 +115,7 @@ body { height: 100%; margin: 0; padding: 0 }
 			map.setCenter(marker.getPosition())
 
 
-			var content = "Carpark Details"+'</br>'+"Name: " + name +  '</br>' + "Address: " + add 
+			var content = "Carpark Details"+'</br>'+"Name: " + name +  '</br>' + "Address: " + add + '</br>'+"Status: "+ availability
 			var infowindow = new google.maps.InfoWindow()
 
 			google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
