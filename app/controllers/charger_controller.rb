@@ -33,6 +33,8 @@ class ChargerController < ApplicationController
 			@ret["address"] = carpark.address
 			@ret["charger_fee"] = carpark.charger_fee
 			@ret["parking_fee"] = carpark.parking_fee
+			@ret["carpark_latitude"] = carpark.latitude
+			@ret["carpark_longitude"] = carpark.longitude
 			@ret["availability"] = "Occupied"
 			if Parkingspace.includes(:evsockets).where( :evsockets => { :evsocket_type => @evsocket_type,:evsocket_status =>'t' }, :parkingspaces=>{:parkingspace_status=>'t',:venue_id=>carpark.id} ).exists?
 				@ret["availability"] = "Available"
