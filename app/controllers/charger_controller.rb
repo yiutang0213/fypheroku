@@ -62,7 +62,7 @@ class ChargerController < ApplicationController
         end
        ## @carparks_ret.sort
        @carparks_hash2=@carparks_hash1.sort_by { |a| a[:availability]}.reverse
-       @carparks_ret=@carparks_hash2.sort_by { |b| b[:est]}
+       @carparks_ret=@carparks_hash2.sort_by { |b| b['est'].sub(/mins/, '').to_i}
       render json: @carparks_ret
      ##respond_to do |format|
      	##format.html { render layout: 'mainpage' }
