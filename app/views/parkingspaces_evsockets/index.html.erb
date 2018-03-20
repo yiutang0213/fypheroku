@@ -8,6 +8,7 @@
 		<td>Code</td>
 		<td>Type</td>
 		<td>Status</td>
+		<td>last updete time</td>
 	</tr>
 	<% @evsockets.each do |evsocket| %>
 	<tr>
@@ -37,6 +38,7 @@
 			Occupied
 			<% end %>
 		</td>
+		<td><%= Time.now-evsocket.updated_at %> second before</td>
 		<td><%= link_to 'edit', edit_venue_parkingspace_evsocket_path(@venue, @parkingspace,evsocket) %></td>
 		<td><%= link_to 'destroy', venue_parkingspace_evsocket_path(@venue,@parkingspace,evsocket), :method => :delete ,:data => { :confirm => "Are you sure?" }%></td>
 	</tr>

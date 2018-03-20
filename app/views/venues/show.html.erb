@@ -27,6 +27,10 @@ Car park detail
 	<tr>
 		<td>Longitude</td>
 		<td><%= (@venue.longitude) %></td>
+	</tr>
+	<tr>
+		<td>Last update time </td>
+		<td><%= (@venue.updated_at) %></td>
 	</table>
 	<p><%= link_to 'Back to index', venues_path %></p>
-<% end %>
+	<% end %>

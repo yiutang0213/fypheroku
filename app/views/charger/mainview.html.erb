@@ -36,6 +36,7 @@ body { height: 100%; margin: 0; padding: 0 }
 		navigator.geolocation.getCurrentPosition(success, error);
 	}
 
+
 	function arraytohtmltable(data,type) {
 		var rows = JSON.parse(data);
 		var locations = [];
@@ -48,18 +49,21 @@ body { height: 100%; margin: 0; padding: 0 }
 		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Charger fee</p></div>';
 		html += '<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">Parking fee</p></div>';
 		html += '<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">Availability</p></div>';
-		html += '<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">Estimated time of arrival</p></div>';
+		html += '<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">No.</p></div>';
+		html += '<div class="col-md-2 col-sm-3 col-xs-3"><p class="carparkdata">Estimated time of arrival</p></div>';
 		html += "</div>"
 		for( var i = 0; i < rows.length; i++) {
-			html += '<div class="row addline">'
+			html +='<div class="row addline">';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].name+'</p></div>';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata"><a href="https://www.google.com/maps/dir/?api=1&destination='+rows[i].address+'" target="_blank";>'+rows[i].address+'</a></p></div>';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].charger_fee+'</p></div>';
 			html +='<div class="col-md-2 col-sm-2 col-xs-2"><p class="carparkdata">'+rows[i].parking_fee+'</p></div>';
 			html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].availability+'</p></div>';
-			html +='<div class="col-md-3 col-sm-3 col-xs-3"><p class="carparkdata">'+rows[i].est+'</p></div>';
+			html +='<div class="col-md-1 col-sm-1 col-xs-1"><p class="carparkdata">'+rows[i].available_parkingspace_no +'</p></div>';
+			html +='<div class="col-md-2 col-sm-3 col-xs-3"><p class="carparkdata">'+rows[i].est+'</p></div>';
 			carparklocaltion =[rows[i].name, rows[i].carpark_latitude, rows[i].carpark_longitude, rows[i].address, rows[i].availability];
-			locations.push(carparklocaltion)
+			locations.push(carparklocaltion);
+
 			html += '</div>';
 		}
 		html += '</div>';
@@ -67,17 +71,11 @@ body { height: 100%; margin: 0; padding: 0 }
 		initialize(locations)
 	}
 </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXyeT9DZpFtxbLAMWqvSVQuPS7gStNNkE&callback=initMap"
-    async defer></script>
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXyeT9DZpFtxbLAMWqvSVQuPS7gStNNkE&callback=initMap"
+async defer></script>
 
 
 <script>
-
-
-
 	function initialize(locations) {
 
 		var myOptions = {
@@ -172,7 +170,6 @@ body { height: 100%; margin: 0; padding: 0 }
 		<br>
 	</center>
 </section>
-
 
 <section class="bg-white masthead" id="result">
 	<center>

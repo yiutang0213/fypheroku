@@ -36,8 +36,10 @@ class ChargerController < ApplicationController
 			@ret["carpark_latitude"] = carpark.latitude
 			@ret["carpark_longitude"] = carpark.longitude
 			@ret["availability"] = "Occupied"
+			@ret["available_parkingspace_no"]=0
 			if Parkingspace.includes(:evsockets).where( :evsockets => { :evsocket_type => @evsocket_type,:evsocket_status =>'t' }, :parkingspaces=>{:parkingspace_status=>'t',:venue_id=>carpark.id} ).exists?
 				@ret["availability"] = "Available"
+				@ret["available_parkingspace_no"]=Parkingspace.includes(:evsockets).where( :evsockets => { :evsocket_type => @evsocket_type,:evsocket_status =>'t' }, :parkingspaces=>{:parkingspace_status=>'t',:venue_id=>carpark.id} ).count
 			end
 			@lat = 0
 			@lon = 0

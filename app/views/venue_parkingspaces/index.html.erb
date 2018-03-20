@@ -7,6 +7,7 @@
 		<td>parking spaceID</td>>
 		<td>Number</td>
 		<td>Status</td>
+		<td>last updete time</td>
 	</tr>
 	<% @parkingspaces.each do |parkingspace| %>
 	<tr>
@@ -18,6 +19,7 @@
 			Occupied
 			<% end %>
 		</td>
+		<td><%= Time.now-parkingspace.updated_at %> second before</td>
 		<td><%= link_to 'edit', edit_venue_parkingspace_path(@venue, parkingspace) %></td>
 		<td><%= link_to 'destroy', venue_parkingspace_path(@venue, parkingspace), :method => :delete ,:data => { :confirm => "Are you sure?" }%></td>
 		<td><%= link_to 'linked EV socket', venue_parkingspace_evsockets_path(@venue,parkingspace) %></td>
